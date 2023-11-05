@@ -6,7 +6,7 @@ namespace Laboratorium_3.Models
     {
         private Dictionary<int, Contact> _contacts = new Dictionary<int, Contact>()
         {
-            {1, new Contact() {Id = 1, Name = "Adam", Email = "adam@wsei.edu.pl", Phone = "123345667", Priority = Priority.Urgent}}
+            {1, new Contact() {Id = 1, Name = "Adam", Email = "adam@wsei.edu.pl", Phone = "123345667", Priority = Priority.Urgent, Created = DateTime.Now,  }}
         };
         private int id = 2;
 

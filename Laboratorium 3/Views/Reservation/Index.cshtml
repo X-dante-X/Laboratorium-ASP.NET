@@ -1,0 +1,47 @@
+﻿@using Laboratorium_3.Models;
+
+@model List<Reservation>
+<h1>Lista rezerwacji</h1>
+<a class="btn btn-primary" asp-controller="Reservation" asp-action="Create">Utworz rezerwacje</a>
+@if (Model.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(i => Model[0].Wlasciciel)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(i => Model[0].Miasto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(i => Model[0].Data)
+                </th>
+                <th>
+                    Akcje
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in @Model)
+            {
+                <tr>
+                    <td>
+                        @item.Wlasciciel
+                    </td>
+                    <td>
+                        @item.Miasto
+                    </td>
+                    <td>
+                        @item.Data
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-primary" asp-controller="Reservation" asp-action="Update" asp-route-id="@item.Id">Edytuj</a>
+                        <a class="btn btn-outline-info" asp-controller="Reservation" asp-action="Details" asp-route-id="@item.Id">Szczegoly</a>
+                        <a class="btn btn-outline-danger" asp-controller="Reservation" asp-action="Delete" asp-route-id="@item.Id">Usun</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

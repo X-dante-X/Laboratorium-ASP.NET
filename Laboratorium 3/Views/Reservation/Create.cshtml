@@ -1,0 +1,39 @@
+﻿@model Reservation
+
+<h1>Dodaj rezerwację</h1>
+
+<form asp-controller="Reservation" asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="Data"></label>
+        <input class="form-control" asp-for="Data" />
+        <span class="text-danger" asp-validation-for="Data"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Miasto"></label>
+        <input class="form-control" asp-for="Miasto" />
+        <span class="text-danger" asp-validation-for="Miasto"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Adres"></label>
+        <input class="form-control" asp-for="Adres" />
+        <span class="text-danger" asp-validation-for="Adres"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Pokoj"></label>
+        <input class="form-control" asp-for="Pokoj" />
+        <span class="text-danger" asp-validation-for="Pokoj"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Wlasciciel"></label>
+        <input class="form-control" asp-for="Wlasciciel" />
+        <span class="text-danger" asp-validation-for="Wlasciciel"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Cena"></label>
+        <input class="form-control" asp-for="Cena" />
+        <span class="text-danger" asp-validation-for="Cena"></span>
+    </div>
+    <div class="mb-3">
+        <button class="btn btn-primary" type="submit">Utwórz</button>
+    </div>
+</form>
