@@ -1,6 +1,9 @@
 ﻿using Laboratorium_3.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Text.RegularExpressions;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Laboratorium_3.Controllers
 {
@@ -22,7 +25,10 @@ namespace Laboratorium_3.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            List<SelectListItem> organizations = CreateOrganizationItemList();
+            Contact model = new Contact();
+            model.OrganizationList = organizations;
+            return View(model);
         }
 
         [HttpPost]
@@ -33,13 +39,25 @@ namespace Laboratorium_3.Controllers
                 _contactService.Add(model);
                 return RedirectToAction("Index");
             }
+            model.OrganizationList = CreateOrganizationItemList();
             return View();
+        }
+
+        private List<SelectListItem> CreateOrganizationItemList()
+        {
+            var gr = new SelectListGroup() { Name = "Organizacje" };
+            return _contactService.FindAllOrganizations()
+                .Select(e => new SelectListItem() { Text = e.Name, Value = e.Id.ToString(), Group = gr })
+                .Append(new SelectListItem(){ Text = "Brak organizacji", Value = "", Selected = true, Group = new SelectListGroup() { Name = "Brak" } })
+                .ToList();
         }
 
         [HttpGet]
         public IActionResult Update(int id)
         {
-            return View(_contactService.FindById(id));
+            var model = _contactService.FindById(id);
+            model.OrganizationList = CreateOrganizationItemList() ;
+            return View(model);
         }
 
         [HttpPost]

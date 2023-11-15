@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using Data.Entities;
+using System.Reflection;
 
 namespace Laboratorium_3.Models
 {
@@ -46,6 +47,12 @@ namespace Laboratorium_3.Models
             {
                 _contacts[contact.Id] = contact;
             }
+        }
+
+
+        public List<OrganizationEntity> FindAllOrganizations()
+        {
+            throw new NotImplementedException();
         }
     }
 }

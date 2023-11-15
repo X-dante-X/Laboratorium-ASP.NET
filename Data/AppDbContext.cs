@@ -11,6 +11,7 @@ namespace Data;
 public class AppDbContext: DbContext
 {
     public DbSet<ContactEntity> Contacts { get; set; }
+    public DbSet<OrganizationEntity> Organizations { get; set; }
     private string Path { get; set; }
 
     public AppDbContext()
@@ -27,11 +28,28 @@ public class AppDbContext: DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<ContactEntity>()
+            .HasOne(c => c.Organization)
+            .WithMany(o => o.Contacts)
+            .HasForeignKey(c => c.OrganizationId);
+
+        modelBuilder.Entity<OrganizationEntity>().HasData
+        (
+            new OrganizationEntity() { Id = 101, Name = "WSEI", Description="Uczelnia wyzsza"},
+            new OrganizationEntity() { Id = 102, Name = "Comarch", Description="Przedsiębiorstwo IT"}
+        );
         modelBuilder.Entity<ContactEntity>().HasData
         (
-            new ContactEntity() {ContactId = 1, Name="Adam", Email="adam@wsei.edu.pl", Phone="124124234", Birth=DateTime.Parse("2000-10-10")},
-            new ContactEntity() {ContactId = 2, Name="Adam", Email="adam@wsei.edu.pl", Phone="124124234", Birth=DateTime.Parse("2000-10-10")},
-            new ContactEntity() {ContactId = 3, Name="Adam", Email="adam@wsei.edu.pl", Phone="124124234", Birth=DateTime.Parse("2000-10-10")}
+            new ContactEntity() {ContactId = 1, Name="Adam", Email="adam@wsei.edu.pl", Phone="124124234", Birth=DateTime.Parse("2000-10-10"), OrganizationId = 101},
+            new ContactEntity() {ContactId = 2, Name="Adam", Email="adam@wsei.edu.pl", Phone="124124234", Birth=DateTime.Parse("2000-10-10"), OrganizationId = 102},
+            new ContactEntity() {ContactId = 3, Name="Adam", Email="adam@wsei.edu.pl", Phone="124124234", Birth=DateTime.Parse("2000-10-10"), OrganizationId = 102}
         );
+        modelBuilder.Entity<OrganizationEntity>()
+            .OwnsOne(o => o.Adress)
+            .HasData
+            (
+                new {OrganizationEntityId = 101, City = "Krakow", Street = "św. Filipa 17", PostalCode = "31-150" },
+                new {OrganizationEntityId = 102, City = "Krakow", Street = "Rozwoju 1/4", PostalCode = "36-160" }
+            );
     }
 }

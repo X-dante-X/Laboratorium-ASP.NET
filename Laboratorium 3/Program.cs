@@ -1,4 +1,6 @@
+using Data;
 using Laboratorium_3.Models;
+using System.Xml.Linq;
 
 namespace Laboratorium_3
 {
@@ -13,6 +15,8 @@ namespace Laboratorium_3
             builder.Services.AddSingleton<IContactService, MemoryContactService>();
             builder.Services.AddSingleton<IDateTimeProvider, CurrentDateTimeProvider>();
             builder.Services.AddSingleton<IReservationService, MemoryReservationService>();
+            builder.Services.AddTransient<IContactService, EFContactService>();
+            builder.Services.AddDbContext<AppDbContext>();
 
             var app = builder.Build();
             

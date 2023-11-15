@@ -1,4 +1,5 @@
-﻿using Laboratorium_3.Models;
+﻿using Data.Entities;
+using Laboratorium_3.Models;
 
 namespace Laboratorium_3.Models
 {
@@ -9,5 +10,6 @@ namespace Laboratorium_3.Models
         List<Contact> FindAll();
         void DeleteById(int id);
         void Update(Contact contact);
+        List<OrganizationEntity> FindAllOrganizations();
     }
 }
