@@ -21,6 +21,15 @@ namespace Laboratorium_3.Controllers
         public IActionResult Index()
         {
             return View(_contactService.FindAll());
+        }        
+        [AllowAnonymous]
+        public IActionResult PagedIndex(int page = 1, int size = 5)
+        {
+            if(size < 1)
+            {
+                return BadRequest();
+            }
+            return View(_contactService.FindPage(page, size));
         }
 
         [HttpGet]
@@ -94,6 +103,25 @@ namespace Laboratorium_3.Controllers
         public IActionResult Details(Contact model)
         {
             return RedirectToAction("Index");
+        }
+
+
+
+        [HttpGet]
+        public IActionResult CreateApi()
+        {            
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateApi(Contact model)
+        {
+            if (ModelState.IsValid)
+            {
+                _contactService.Add(model);
+                return RedirectToAction("Index");
+            }
+            return View();
         }
     }
 }
