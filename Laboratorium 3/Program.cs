@@ -18,10 +18,12 @@ namespace Laboratorium_3
             builder.Services.AddMemoryCache();
             builder.Services.AddSession();
             builder.Services.AddControllersWithViews();
+
             builder.Services.AddSingleton<IContactService, MemoryContactService>();
             builder.Services.AddSingleton<IDateTimeProvider, CurrentDateTimeProvider>();
             builder.Services.AddSingleton<IReservationService, MemoryReservationService>();
             builder.Services.AddTransient<IContactService, EFContactService>();
+
             builder.Services.AddDbContext<AppDbContext>();
 
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -43,8 +45,12 @@ namespace Laboratorium_3
             app.UseStaticFiles();
 
             app.UseRouting();
-            app.UseAuthentication();;
+
+            app.UseMiddleware<LastVisitCookie>();
+
+            app.UseAuthentication();
             app.UseAuthorization();
+
             app.UseSession();                                        
             app.MapRazorPages();
             app.MapControllerRoute(

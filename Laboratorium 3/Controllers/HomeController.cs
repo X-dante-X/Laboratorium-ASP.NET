@@ -15,6 +15,15 @@ namespace Laboratorium_3.Controllers
 
         public IActionResult Index()
         {
+            var lastVisitDate = HttpContext.Items[LastVisitCookie.CookieName] as DateTime?;
+            if (lastVisitDate == null) 
+            {
+                ViewBag.LastVisitDate = HttpContext.Items[LastVisitCookie.CookieName];
+            }
+            else
+            {
+                ViewBag.LastVisitDate = lastVisitDate?.Date;
+            }
             return View();
         }
 

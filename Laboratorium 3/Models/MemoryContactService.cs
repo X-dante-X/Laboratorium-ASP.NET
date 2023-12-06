@@ -5,11 +5,8 @@ namespace Laboratorium_3.Models
 {
     public class MemoryContactService : IContactService
     {
-        private Dictionary<int, Contact> _contacts = new Dictionary<int, Contact>()
-        {
-            {1, new Contact() {Id = 1, Name = "Adam", Email = "adam@wsei.edu.pl", Phone = "123345667", Priority = Priority.Urgent, Created = DateTime.Now,  }}
-        };
-        private int id = 2;
+        private Dictionary<int, Contact> _contacts = new Dictionary<int, Contact>();
+        private int _id = 1;
 
         private readonly IDateTimeProvider _timeProvider;
         public MemoryContactService(IDateTimeProvider timeProvider)
@@ -20,7 +17,7 @@ namespace Laboratorium_3.Models
         public int Add(Contact model)
         {
             model.Created = _timeProvider.Now();
-            model.Id = id++;
+            model.Id = _id++;
             _contacts[model.Id] = model;
             return model.Id;
 
@@ -38,7 +35,7 @@ namespace Laboratorium_3.Models
 
         public Contact? FindById(int id)
         {
-            return _contacts[id];
+            return _contacts.ContainsKey(id) ? _contacts[id] : null;
         }
 
         public void Update(Contact contact)
