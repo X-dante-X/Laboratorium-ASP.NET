@@ -1,12 +1,12 @@
-﻿@model Reservation
+﻿@using Laboratorium_3.Models.ReservationModels;
+@model Reservation
 
 <h1>
     Czy na pewno chcesz usunąć rezerwacje?
 </h1>
-<p>Wlasciciel</p>
-<h3>@Model.Wlasciciel</h3>
-<p>Data</p>
-<h3>@Model.Data</h3>
+<h3>Wlasciciel: @Model.Wlasciciel</h3>
+<h3>Data: @Model.Data.ToShortDateString()</h3>
+<h3>Miasto: @Model.Miasto</h3>
 <form asp-action="Delete" method="post"> 
     <input asp-for="Id" />
     <button class="btn btn-danger" type="submit">Tak</button>

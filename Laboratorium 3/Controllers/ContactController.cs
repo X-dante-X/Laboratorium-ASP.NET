@@ -1,4 +1,4 @@
-﻿using Laboratorium_3.Models;
+﻿using Laboratorium_3.Models.ContactModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

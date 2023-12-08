@@ -1,4 +1,5 @@
-﻿@model Reservation
+﻿@using Laboratorium_3.Models.ReservationModels;
+@model Reservation
 
 <h1>Edytuj rezerwację</h1>
 
@@ -15,9 +16,9 @@
         <span class="text-danger" asp-validation-for="Miasto"></span>
     </div>
     <div class="mb-3">
-        <label asp-for="Adres">Adres</label>
-        <input class="form-control" asp-for="Adres" />
-        <span class="text-danger" asp-validation-for="Adres"></span>
+        <label asp-for="Adress">Adres</label>
+        <input class="form-control" asp-for="Adress" />
+        <span class="text-danger" asp-validation-for="Adress"></span>
     </div>
     <div class="mb-3">
         <label asp-for="Pokoj">Pokój</label>

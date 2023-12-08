@@ -1,4 +1,4 @@
-﻿namespace Laboratorium_3.Models
+﻿namespace Laboratorium_3.Models.ContactModels
 {
     public class CurrentDateTimeProvider : IDateTimeProvider
     {

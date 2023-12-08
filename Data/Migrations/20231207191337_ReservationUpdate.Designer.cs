@@ -3,6 +3,7 @@ using System;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231207191337_ReservationUpdate")]
+    partial class ReservationUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.13");
@@ -111,50 +114,6 @@ namespace Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Data.Entities.Reservarion.ReservationEntity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<decimal>("Cena")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("Data")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Pokoj")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Wlasciciel")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Reservations");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Cena = 190.23m,
-                            Data = new DateTime(2000, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Pokoj = "13A",
-                            Wlasciciel = "Adam"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Cena = 156.99m,
-                            Data = new DateTime(2012, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Pokoj = "5",
-                            Wlasciciel = "Adam"
-                        });
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -183,8 +142,8 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8767a0ef-6a75-4467-833b-31d88538e13f",
-                            ConcurrencyStamp = "8767a0ef-6a75-4467-833b-31d88538e13f",
+                            Id = "3a8e4f4a-6bfe-4df2-83bb-c7bee1f3cc7c",
+                            ConcurrencyStamp = "3a8e4f4a-6bfe-4df2-83bb-c7bee1f3cc7c",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });
@@ -279,17 +238,17 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8c290f1a-6c6c-4f38-92da-181dcfd5872a",
+                            Id = "7dd56b9f-5948-4f0b-8c63-7871d8f01d73",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "298c9674-76ae-4d35-b09b-673e47451f2c",
+                            ConcurrencyStamp = "74e23a11-dda7-4055-ae0a-91f19a8aa1bb",
                             Email = "adam@wsei.edu.pl",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADAM@WSEI.EDU.PL",
                             NormalizedUserName = "ADAM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKjMcscQzGjqWX6SpjcHcYAJPCFgcvNBuPu2byUpbriBN4xgZTT4jw3E9sL6uNrOJg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIL1+ACKYq5XXbhH1UaswCbKCUsTt5BX40WdzsWOUySNgtVvH+GLGV7VPD6JoZDt5w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e9d6a1e3-82d4-4612-828b-b2b55301fddf",
+                            SecurityStamp = "7489623a-1206-4cb1-8894-88ab0ec6c872",
                             TwoFactorEnabled = false,
                             UserName = "adam"
                         });
@@ -357,8 +316,8 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "8c290f1a-6c6c-4f38-92da-181dcfd5872a",
-                            RoleId = "8767a0ef-6a75-4467-833b-31d88538e13f"
+                            UserId = "7dd56b9f-5948-4f0b-8c63-7871d8f01d73",
+                            RoleId = "3a8e4f4a-6bfe-4df2-83bb-c7bee1f3cc7c"
                         });
                 });
 
@@ -430,53 +389,6 @@ namespace Data.Migrations
                                     City = "Krakow",
                                     PostalCode = "36-160",
                                     Street = "Rozwoju 1/4"
-                                });
-                        });
-
-                    b.Navigation("Adress")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Data.Entities.Reservarion.ReservationEntity", b =>
-                {
-                    b.OwnsOne("Data.Models.Adress", "Adress", b1 =>
-                        {
-                            b1.Property<int>("ReservationEntityId")
-                                .HasColumnType("INTEGER");
-
-                            b1.Property<string>("City")
-                                .IsRequired()
-                                .HasColumnType("TEXT");
-
-                            b1.Property<string>("PostalCode")
-                                .IsRequired()
-                                .HasColumnType("TEXT");
-
-                            b1.Property<string>("Street")
-                                .IsRequired()
-                                .HasColumnType("TEXT");
-
-                            b1.HasKey("ReservationEntityId");
-
-                            b1.ToTable("Reservations");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ReservationEntityId");
-
-                            b1.HasData(
-                                new
-                                {
-                                    ReservationEntityId = 1,
-                                    City = "Krakow",
-                                    PostalCode = "30-015",
-                                    Street = "Mazowiecka 12"
-                                },
-                                new
-                                {
-                                    ReservationEntityId = 2,
-                                    City = "Krakow",
-                                    PostalCode = "30-322",
-                                    Street = "Czarodziejska 2"
                                 });
                         });
 

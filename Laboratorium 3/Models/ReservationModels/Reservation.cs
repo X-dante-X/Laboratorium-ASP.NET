@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
-namespace Laboratorium_3.Models
+namespace Laboratorium_3.Models.ReservationModels
 {
     public class Reservation
     {
@@ -11,7 +11,7 @@ namespace Laboratorium_3.Models
         [Required(ErrorMessage = "Pole Data jest wymagane.")]
         [Display(Name = "Data")]
         [DataType(DataType.Date)]
-        public DateTime? Data { get; set; }
+        public DateTime Data { get; set; }
 
         [Required(ErrorMessage = "Pole Miasto jest wymagane.")]
         [Display(Name = "Miasto")]
@@ -19,7 +19,7 @@ namespace Laboratorium_3.Models
 
         [Required(ErrorMessage = "Pole Adres jest wymagane.")]
         [Display(Name = "Adres")]
-        public string Adres { get; set; }
+        public string Adress { get; set; }
 
         [Required(ErrorMessage = "Pole Pokój jest wymagane.")]
         [Display(Name = "Pokój")]

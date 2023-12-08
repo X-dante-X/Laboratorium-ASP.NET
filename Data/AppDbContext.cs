@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Data.Entities.Reservarion;
 
 namespace Data;
 
@@ -14,6 +15,7 @@ public class AppDbContext: IdentityDbContext<IdentityUser>
 {
     public DbSet<ContactEntity> Contacts { get; set; }
     public DbSet<OrganizationEntity> Organizations { get; set; }
+    public DbSet<ReservationEntity> Reservations { get; set; }
     private string Path { get; set; }
 
     public AppDbContext()
@@ -90,5 +92,19 @@ public class AppDbContext: IdentityDbContext<IdentityUser>
                 new {OrganizationEntityId = 101, City = "Krakow", Street = "św. Filipa 17", PostalCode = "31-150" },
                 new {OrganizationEntityId = 102, City = "Krakow", Street = "Rozwoju 1/4", PostalCode = "36-160" }
             );
+
+
+        modelBuilder.Entity<ReservationEntity>().HasData
+        (
+            new ReservationEntity() { Id = 1, Data = DateTime.Parse("2000-10-10"), Cena = (decimal)190.23, Pokoj="13A", Wlasciciel="Adam" },
+            new ReservationEntity() { Id = 2, Data = DateTime.Parse("2012-11-11"), Cena = (decimal)156.99, Pokoj = "5", Wlasciciel = "Adam" }
+        );
+        modelBuilder.Entity<ReservationEntity>()
+        .OwnsOne(o => o.Adress)
+        .HasData
+        (
+            new { ReservationEntityId = 1, City = "Krakow", Street = "Mazowiecka 12", PostalCode = "30-015" },
+            new { ReservationEntityId = 2, City = "Krakow", Street = "Czarodziejska 2", PostalCode = "30-322" }
+        );
     }
 }

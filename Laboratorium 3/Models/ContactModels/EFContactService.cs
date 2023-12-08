@@ -1,7 +1,7 @@
 ﻿using Data;
 using Data.Entities;
 
-namespace Laboratorium_3.Models;
+namespace Laboratorium_3.Models.ContactModels;
 
 public class EFContactService : IContactService
 {
@@ -31,7 +31,7 @@ public class EFContactService : IContactService
 
     public List<Contact> FindAll()
     {
-        return _context.Contacts.Select(e => ContactMapper.FromEntity(e)).ToList(); ;
+        return _context.Contacts.Select(e => ContactMapper.FromEntity(e)).ToList(); 
     }
 
     public List<OrganizationEntity> FindAllOrganizations()
@@ -47,7 +47,7 @@ public class EFContactService : IContactService
     public PagingList<Contact> FindPage(int page, int size)
     {
         return PagingList<Contact>.Create(
-            (p, s) =>_context.Contacts.OrderBy(c=>c.Name).Skip((p-1)*s).Take(s).Select(ContactMapper.FromEntity).ToList(),
+            (p, s) => _context.Contacts.OrderBy(c => c.Name).Skip((p - 1) * s).Take(s).Select(ContactMapper.FromEntity).ToList(),
             page,
             size,
             _context.Contacts.Count()

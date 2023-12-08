@@ -1,9 +1,11 @@
-﻿using Laboratorium_3.Models;
+﻿using Laboratorium_3.Models.ReservationModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Laboratorium_3.Controllers
 {
+    [Authorize(Roles = "admin")]
 
     public class ReservationController : Controller
     {
@@ -13,68 +15,74 @@ namespace Laboratorium_3.Controllers
         {
             _reservationService = reservationService;
         }
+        [AllowAnonymous]
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_reservationService.FindAll());
+            return View(await _reservationService.FindAllAsync());
         }
 
         [HttpGet]
-        public IActionResult Create()
+        [AllowAnonymous]
+        public async Task<IActionResult> PagedIndex(int page = 1, int size = 5)
+        {
+            if (size < 1)
+            {
+                return BadRequest();
+            }
+            return View(await _reservationService.FindPageAsync(page, size));
+        }
+
+        public async Task<IActionResult> Create()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(Reservation model)
+        public async Task<IActionResult> Create(Reservation model)
         {
             if (ModelState.IsValid)
             {
-                _reservationService.Add(model);
+                await _reservationService.AddAsync(model);
                 return RedirectToAction("Index");
             }
             return View();
         }
 
         [HttpGet]
-        public IActionResult Update(int id)
+        public async Task<IActionResult> Update(int id)
         {
-            return View(_reservationService.FindById(id));
+            return View(await _reservationService.FindByIdAsync(id));
         }
 
         [HttpPost]
-        public IActionResult Update(Reservation model)
+        public async Task<IActionResult> Update(Reservation model)
         {
             if (ModelState.IsValid)
             {
-                _reservationService.Update(model);
+                await _reservationService.UpdateAsync(model);
                 return RedirectToAction("Index");
             }
             return View();
         }
 
         [HttpGet]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            return View(_reservationService.FindById(id));
+            return View(await _reservationService.FindByIdAsync(id));
         }
 
         [HttpPost]
-        public IActionResult Delete(Reservation model)
+        public async Task<IActionResult> Delete(Reservation model)
         {
-            _reservationService.DeleteById(model.Id);
+            await _reservationService.DeleteByIdAsync(model.Id);
             return RedirectToAction("Index");
         }
 
         [HttpGet]
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            return View(_reservationService.FindById(id));
-        }
-        [HttpPost]
-        public IActionResult Details(Reservation model)
-        {
-            return RedirectToAction("Index");
+            return View(await _reservationService.FindByIdAsync(id));
         }
     }
 }

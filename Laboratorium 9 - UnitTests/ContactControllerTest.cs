@@ -1,5 +1,7 @@
 using Laboratorium_3.Controllers;
 using Laboratorium_3.Models;
+using Laboratorium_3.Models.ContactModels;
+using Laboratorium_3.Models.ReservationModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
 
@@ -32,7 +34,7 @@ namespace Laboratorium_9___UnitTests
         [Theory]
         [InlineData(1)]
         [InlineData(2)]
-        public void DetailsTestForExistingContacts(int id) 
+        public void DetailsTestForExistingContacts(int id)
         {
             var result = _controller.Details(id);
             Assert.IsType<ViewResult>(result);
@@ -53,7 +55,7 @@ namespace Laboratorium_9___UnitTests
         [Fact]
         public void CreateTest()
         {
-            Contact model = new Contact() { Name  = "Test", Email = "test@wsei.pl", Phone="123"};
+            Contact model = new Contact() { Name = "Test", Email = "test@wsei.pl", Phone = "123" };
             var count = _service.FindAll().Count;
             var result = _controller.Create(model);
             Assert.Equal(count + 1, _service.FindAll().Count);

@@ -1,12 +1,13 @@
-﻿@model Reservation
+﻿@using Laboratorium_3.Models.ReservationModels;
+@model Reservation
 
 <h1>
     Szczegóły
 </h1>
 <h3>Właściciel - @Model.Wlasciciel</h3>
-<h3>Data - @Model.Data</h3>
+<h3>Data - @Model.Data.ToShortDateString()</h3>
 <h3>Miasto - @Model.Miasto</h3>
-<h3>Adres - @Model.Adres</h3>
+<h3>Adres - @Model.Adress</h3>
 <h3>Pokój - @Model.Pokoj</h3>
 <h3>Cena - @Model.Cena</h3>
 <a class="btn btn-primary" asp-action="Index">Powrót</a>

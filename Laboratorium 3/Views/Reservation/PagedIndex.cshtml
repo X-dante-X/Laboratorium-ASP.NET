@@ -1,26 +1,25 @@
 ﻿@using Laboratorium_3.Models;
-@using Laboratorium_3.Models.ContactModels;
+@using Laboratorium_3.Models.ReservationModels;
 
-@model PagingList<Contact>
-<h1>Lista kontaktow</h1>
-<a class="btn btn-primary" asp-controller="Contact" asp-action="Create">Utworz kontakt</a>
-<a class="btn btn-primary" asp-controller="Contact" asp-action="CreateApi">Utworz kontakt Api</a>
+@model PagingList<Reservation>
+
+<h1>Lista rezerwacji</h1>
+<a class="btn btn-primary" asp-controller="Reservation" asp-action="Create">Utworz rezerwacje</a>
+<a class="btn btn-primary" asp-controller="Reservation" asp-action="Index">Zwykla witryna</a>
+
 @if (Model.Data.Count() > 0)
 {
     <table class="table">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Data.GetEnumerator().Current.Name)
+                    @Html.DisplayNameFor(model => model.Data.GetEnumerator().Current.Wlasciciel)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Data.GetEnumerator().Current.Email)
+                    @Html.DisplayNameFor(model => model.Data.GetEnumerator().Current.Miasto)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Data.GetEnumerator().Current.Priority)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Data.GetEnumerator().Current.Created)
+                    @Html.DisplayNameFor(model => model.Data.GetEnumerator().Current.Data)
                 </th>
                 <th>
                     Akcje
@@ -32,35 +31,32 @@
             {
                 <tr>
                     <td>
-                        @item.Name
+                        @item.Wlasciciel
                     </td>
                     <td>
-                        @item.Email
+                        @item.Miasto
                     </td>
                     <td>
-                        @item.Priority.GetDisplayName()
+                        @item.Data.ToShortDateString()
                     </td>
                     <td>
-                        @item.Created
-                    </td>
-                    <td>
-                        <a class="btn btn-outline-primary" asp-controller="Contact" asp-action="Update" asp-route-id="@item.Id">Edytuj</a>
-                        <a class="btn btn-outline-info" asp-controller="Contact" asp-action="Details" asp-route-id="@item.Id">Szczegoly</a>
-                        <a class="btn btn-outline-danger" asp-controller="Contact" asp-action="Delete" asp-route-id="@item.Id">Usun</a>
+                        <a class="btn btn-outline-primary" asp-controller="Reservation" asp-action="Update" asp-route-id="@item.Id">Edytuj</a>
+                        <a class="btn btn-outline-info" asp-controller="Reservation" asp-action="Details" asp-route-id="@item.Id">Szczegoly</a>
+                        <a class="btn btn-outline-danger" asp-controller="Reservation" asp-action="Delete" asp-route-id="@item.Id">Usun</a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-
 }
+
 <nav aria-label="Books page navigation">
     <ul class="pagination">
         @if (Model.IsPrevious)
         {
             <li class="page-item">
                 <a class="page-link"
-                   asp-controller="Contact"
+                   asp-controller="Reservation"
                    asp-action="PagedIndex"
                    asp-route-page="@(Model.Page - 1)"
                    asp-route-size="@Model.Size">
@@ -81,7 +77,7 @@
         {
             <li class="page-item">
                 <a class="page-link"
-                   asp-controller="Contact"
+                   asp-controller="Reservation"
                    asp-action="PagedIndex"
                    asp-route-page="@(Model.Page + 1)"
                    asp-route-size="@Model.Size">
