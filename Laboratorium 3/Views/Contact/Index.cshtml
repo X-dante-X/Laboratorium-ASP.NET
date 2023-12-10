@@ -5,6 +5,8 @@
 <h1>Lista kontaktow</h1>
 <a class="btn btn-primary" asp-controller="Contact" asp-action="Create">Utworz kontakt</a>
 <a class="btn btn-primary" asp-controller="Contact" asp-action="CreateApi">Utworz kontakt Api</a>
+<a class="btn btn-primary" asp-controller="Contact" asp-action="PagedIndex">Stronicowana witryna</a>
+
 @if (Model.Count > 0)
 {
     <table class="table">

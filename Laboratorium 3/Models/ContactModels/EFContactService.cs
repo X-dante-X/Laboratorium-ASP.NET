@@ -27,6 +27,7 @@ public class EFContactService : IContactService
         {
             _context.Contacts.Remove(find);
         }
+        _context.SaveChanges();
     }
 
     public List<Contact> FindAll()
@@ -57,5 +58,6 @@ public class EFContactService : IContactService
     public void Update(Contact contact)
     {
         _context.Contacts.Update(ContactMapper.ToEntity(contact));
+        _context.SaveChanges();
     }
 }

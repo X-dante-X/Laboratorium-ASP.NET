@@ -1,4 +1,5 @@
 ﻿using Data.Entities;
+using Laboratorium_3.Models.ReservationModels;
 using System.Reflection;
 
 namespace Laboratorium_3.Models.ContactModels
@@ -54,7 +55,16 @@ namespace Laboratorium_3.Models.ContactModels
 
         public PagingList<Contact> FindPage(int page, int size)
         {
-            throw new NotImplementedException();
+            return PagingList<Contact>.Create(
+            (p, s) => _contacts.OrderBy(c => c.Value.Name)
+                .Skip((p - 1) * s)
+                .Take(s)
+                .Select(c => c.Value)
+            .ToList(),
+                page,
+                size,
+                _contacts.Count()
+            );
         }
     }
 }
