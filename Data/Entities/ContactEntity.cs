@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,6 +22,8 @@ public class ContactEntity
     public string Email { get; set; }
     public string? Phone { get; set; }
     public DateTime? Birth { get; set; }
+    public DateTime Created { get; set; }
+    public Priority Priority { get; set; }
     public OrganizationEntity? Organization { get; set; }
     public int? OrganizationId { get; set; }
     public IList<ReservationEntity> Reservations { get; set; }

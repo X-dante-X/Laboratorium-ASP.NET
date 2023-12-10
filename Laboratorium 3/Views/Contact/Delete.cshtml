@@ -4,8 +4,9 @@
 <h1>
     Czy na pewno chcesz usunąć kontakt
 </h1>
-<p>imie</p>
-<h3>@Model.Name</h3>
+<h3>Imie - @Model.Name</h3>
+<h3>Email - @Model.Email</h3>
+<h3>Telefon - @Model.Phone</h3>
 <form asp-action="Delete" method="post"> 
     <input asp-for="Id" />
     <button class="btn btn-danger" type="submit">Tak</button>

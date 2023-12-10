@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Data.Entities.Reservarion;
+using Data.Models;
 
 namespace Data;
 
@@ -81,9 +82,9 @@ public class AppDbContext: IdentityDbContext<IdentityUser>
         );
         modelBuilder.Entity<ContactEntity>().HasData
         (
-            new ContactEntity() {ContactId = 1, Name="Adam", Email="adam@wsei.edu.pl", Phone="124124234", Birth=DateTime.Parse("2000-10-10"), OrganizationId = 101},
-            new ContactEntity() {ContactId = 2, Name="Adam", Email="adam@wsei.edu.pl", Phone="124124234", Birth=DateTime.Parse("2000-10-10"), OrganizationId = 102},
-            new ContactEntity() {ContactId = 3, Name="Adam", Email="adam@wsei.edu.pl", Phone="124124234", Birth=DateTime.Parse("2000-10-10"), OrganizationId = 102}
+            new ContactEntity() {ContactId = 1, Name="Adam", Email="adam@wsei.edu.pl", Phone="124124234", Birth=DateTime.Parse("2000-10-10"), Created = DateTime.Parse("2000-10-10"), Priority = Priority.Low, OrganizationId = 101},
+            new ContactEntity() {ContactId = 2, Name="Adam", Email="adam@wsei.edu.pl", Phone="124124234", Birth=DateTime.Parse("2000-11-11"), Created = DateTime.Parse("2000-11-11"), Priority = Priority.Normal, OrganizationId = 102},
+            new ContactEntity() {ContactId = 3, Name="Adam", Email="adam@wsei.edu.pl", Phone="124124234", Birth=DateTime.Parse("2000-12-12"), Created = DateTime.Parse("2000-12-12"), Priority = Priority.Normal, OrganizationId = 102}
         );
         modelBuilder.Entity<OrganizationEntity>()
             .OwnsOne(o => o.Adress)

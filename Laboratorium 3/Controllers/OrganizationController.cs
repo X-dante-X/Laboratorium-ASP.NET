@@ -55,16 +55,11 @@ namespace Laboratorium_3.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Description")] OrganizationEntity organizationEntity)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(organizationEntity);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(organizationEntity);
+            _context.Add(organizationEntity);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Create", "Contact");
         }
 
         // GET: Organization/Edit/5
@@ -87,7 +82,6 @@ namespace Laboratorium_3.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] OrganizationEntity organizationEntity)
         {
             if (id != organizationEntity.Id)
@@ -95,8 +89,7 @@ namespace Laboratorium_3.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
+
                 try
                 {
                     _context.Update(organizationEntity);
@@ -114,8 +107,7 @@ namespace Laboratorium_3.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
-            return View(organizationEntity);
+
         }
 
         // GET: Organization/Delete/5
@@ -138,7 +130,6 @@ namespace Laboratorium_3.Controllers
 
         // POST: Organization/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Organizations == null)

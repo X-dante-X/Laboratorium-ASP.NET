@@ -13,6 +13,9 @@ public class ContactMapper
             Email = entity.Email,
             Phone = entity.Phone,
             Birth = entity.Birth,
+            Created = entity.Created,
+            Priority = entity.Priority
+
         };
     }
 
@@ -25,6 +28,8 @@ public class ContactMapper
             Email = model.Email,
             Phone = model.Phone,
             Birth = model.Birth,
+            Created = model.Created,
+            Priority = model.Priority
         };
     }
 }

@@ -20,9 +20,9 @@ namespace Laboratorium_9___UnitTests
         }
 
         [Fact]
-        public void IndexTest()
+        public async Task IndexTest()
         {
-            var result = _controller.Index();
+            var result = await _controller.Index();
             Assert.IsType<ViewResult>(result);
             var view = result as ViewResult;
             Assert.IsType<List<Contact>>(view?.Model);
@@ -34,9 +34,9 @@ namespace Laboratorium_9___UnitTests
         [Theory]
         [InlineData(1)]
         [InlineData(2)]
-        public void DetailsTestForExistingContacts(int id)
+        public async Task DetailsTestForExistingContacts(int id)
         {
-            var result = _controller.Details(id);
+            var result = await _controller.Details(id);
             Assert.IsType<ViewResult>(result);
             var view = result as ViewResult;
             Assert.IsType<Contact>(view?.Model);
@@ -46,19 +46,19 @@ namespace Laboratorium_9___UnitTests
         }
 
         [Fact]
-        public void DetailsTestForNonExistingContacts()
+        public async Task DetailsTestForNonExistingContacts()
         {
-            var result = _controller.Details(3);
+            var result = await _controller.Details(3);
             Assert.IsType<NotFoundResult>(result);
         }
 
         [Fact]
-        public void CreateTest()
+        public async Task CreateTest()
         {
             Contact model = new Contact() { Name = "Test", Email = "test@wsei.pl", Phone = "123" };
-            var count = _service.FindAll().Count;
-            var result = _controller.Create(model);
-            Assert.Equal(count + 1, _service.FindAll().Count);
+            var count = (await _service.FindAllAsync()).Count;
+            var result = await _controller.Create(model);
+            Assert.Equal(count + 1, (await _service.FindAllAsync()).Count);
         }
     }
 }

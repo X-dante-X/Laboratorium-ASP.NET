@@ -3,6 +3,7 @@ using System;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231210193434_UpdateContact")]
+    partial class UpdateContact
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.13");
@@ -24,9 +27,6 @@ namespace Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("Birth")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
@@ -59,7 +59,6 @@ namespace Data.Migrations
                         {
                             ContactId = 1,
                             Birth = new DateTime(2000, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created = new DateTime(2000, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "adam@wsei.edu.pl",
                             Name = "Adam",
                             OrganizationId = 101,
@@ -69,8 +68,7 @@ namespace Data.Migrations
                         new
                         {
                             ContactId = 2,
-                            Birth = new DateTime(2000, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created = new DateTime(2000, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Birth = new DateTime(2000, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "adam@wsei.edu.pl",
                             Name = "Adam",
                             OrganizationId = 102,
@@ -80,8 +78,7 @@ namespace Data.Migrations
                         new
                         {
                             ContactId = 3,
-                            Birth = new DateTime(2000, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Created = new DateTime(2000, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Birth = new DateTime(2000, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "adam@wsei.edu.pl",
                             Name = "Adam",
                             OrganizationId = 102,
@@ -195,8 +192,8 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "467ff5e2-59ff-408b-bf6f-f10879d64056",
-                            ConcurrencyStamp = "467ff5e2-59ff-408b-bf6f-f10879d64056",
+                            Id = "c0bb7131-b835-42a2-8b53-8bae7a0fd538",
+                            ConcurrencyStamp = "c0bb7131-b835-42a2-8b53-8bae7a0fd538",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });
@@ -291,17 +288,17 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "69756a28-2d88-460e-87a6-f3a0cc1fc11f",
+                            Id = "9c484dfb-fedb-45da-a247-5097fdf5dd25",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5300a8a0-929e-422d-9113-f86fd99c79a0",
+                            ConcurrencyStamp = "2c1eb32d-effc-46a6-a19e-f4bb4a7de697",
                             Email = "adam@wsei.edu.pl",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADAM@WSEI.EDU.PL",
                             NormalizedUserName = "ADAM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJSWh0ew480029U+31UB5t4irQW22GZhNB87bLNC9v1qmxSlf+GQ0usrAxax2p+MwQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAItFiSmMaSUSaxrMP2Zi2oN9d53Y5YbkPA/cHlhQyuK54Vy0A60ikhr7S5wrjiy6g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "451bc90b-9267-4c38-97db-0c8560fec374",
+                            SecurityStamp = "04bb9a16-2ef7-427a-872b-1d7edba3f4a4",
                             TwoFactorEnabled = false,
                             UserName = "adam"
                         });
@@ -369,8 +366,8 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "69756a28-2d88-460e-87a6-f3a0cc1fc11f",
-                            RoleId = "467ff5e2-59ff-408b-bf6f-f10879d64056"
+                            UserId = "9c484dfb-fedb-45da-a247-5097fdf5dd25",
+                            RoleId = "c0bb7131-b835-42a2-8b53-8bae7a0fd538"
                         });
                 });
 

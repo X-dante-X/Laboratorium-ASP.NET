@@ -1,19 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Data.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
 namespace Laboratorium_3.Models.ContactModels
 {
-    public enum Priority
-    {
-        [Display(Name = "Niski")]
-        Low,
-        [Display(Name = "Normalny")]
-        Normal,
-        [Display(Name = "Pilny")]
-        Urgent
-    }
 
     public class Contact
     {

@@ -17,113 +17,119 @@ namespace Laboratorium_3.Controllers
         {
             _contactService = contactService;
         }
+
         [AllowAnonymous]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(_contactService.FindAll());
-        }        
+            var contacts = await _contactService.FindAllAsync();
+            return View(contacts);
+        }
+
         [AllowAnonymous]
-        public IActionResult PagedIndex(int page = 1, int size = 5)
+        public async Task<IActionResult> PagedIndex(int page = 1, int size = 5)
         {
-            if(size < 1)
+            if (size < 1)
             {
                 return BadRequest();
             }
-            return View(_contactService.FindPage(page, size));
+
+            var contactsPaged = await _contactService.FindPageAsync(page, size);
+            return View(contactsPaged);
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            List<SelectListItem> organizations = CreateOrganizationItemList();
-            Contact model = new Contact();
-            model.OrganizationList = organizations;
+            var organizations = CreateOrganizationItemList();
+            var model = new Contact { OrganizationList = organizations };
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult Create(Contact model)
+        public async Task<IActionResult> Create(Contact model)
         {
             if (ModelState.IsValid)
             {
-                _contactService.Add(model);
+                await _contactService.AddAsync(model);
                 return RedirectToAction("Index");
             }
+
             model.OrganizationList = CreateOrganizationItemList();
-            return View();
+            return View(model);
         }
 
         private List<SelectListItem> CreateOrganizationItemList()
         {
-            var gr = new SelectListGroup() { Name = "Organizacje" };
-            return _contactService.FindAllOrganizations()
-                .Select(e => new SelectListItem() { Text = e.Name, Value = e.Id.ToString(), Group = gr })
-                .Append(new SelectListItem(){ Text = "Brak organizacji", Value = "", Selected = true, Group = new SelectListGroup() { Name = "Brak" } })
+            var group = new SelectListGroup { Name = "Organizacje" };
+            return _contactService.FindAllOrganizationsAsync()
+                .Result 
+                .Select(e => new SelectListItem { Text = e.Name, Value = e.Id.ToString(), Group = group })
+                .Append(new SelectListItem { Text = "Brak organizacji", Value = "", Selected = true, Group = new SelectListGroup { Name = "Brak" } })
                 .ToList();
         }
 
         [HttpGet]
-        public IActionResult Update(int id)
+        public async Task<IActionResult> Update(int id)
         {
-            var model = _contactService.FindById(id);
-            model.OrganizationList = CreateOrganizationItemList() ;
+            var model = await _contactService.FindByIdAsync(id);
+            model.OrganizationList = CreateOrganizationItemList();
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult Update(Contact model)
+        public async Task<IActionResult> Update(Contact model)
         {
             if (ModelState.IsValid)
             {
-                _contactService.Update(model);
+                await _contactService.UpdateAsync(model);
                 return RedirectToAction("Index");
             }
             return View();
         }
 
         [HttpGet]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            return View(_contactService.FindById(id));
+            var model = await _contactService.FindByIdAsync(id);
+            return View(model);
         }
 
         [HttpPost]
-        public IActionResult Delete(Contact model)
+        public async Task<IActionResult> Delete(Contact model)
         {
-            _contactService.DeleteById(model.Id);
+            await _contactService.DeleteByIdAsync(model.Id);
             return RedirectToAction("Index");
         }
 
         [HttpGet]
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            var model = _contactService.FindById(id);
-            if(model == null)
+            var model = await _contactService.FindByIdAsync(id);
+            if (model == null)
             {
                 return NotFound();
             }
             return View(model);
         }
+
         [HttpPost]
         public IActionResult Details(Contact model)
         {
             return RedirectToAction("Index");
         }
 
-
-
         [HttpGet]
         public IActionResult CreateApi()
-        {            
+        {
             return View();
         }
 
         [HttpPost]
-        public IActionResult CreateApi(Contact model)
+        public async Task<IActionResult> CreateApi(Contact model)
         {
             if (ModelState.IsValid)
             {
-                _contactService.Add(model);
+                await _contactService.AddAsync(model);
                 return RedirectToAction("Index");
             }
             return View();
