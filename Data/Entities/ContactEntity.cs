@@ -26,7 +26,5 @@ public class ContactEntity
     public Priority Priority { get; set; }
     public OrganizationEntity? Organization { get; set; }
     public int? OrganizationId { get; set; }
-    public IList<ReservationEntity> Reservations { get; set; }
-
 
 }

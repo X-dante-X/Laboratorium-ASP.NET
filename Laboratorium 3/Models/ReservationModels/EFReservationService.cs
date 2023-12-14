@@ -1,5 +1,6 @@
 ﻿using Data;
 using Data.Entities;
+using Data.Entities.Reservarion;
 
 namespace Laboratorium_3.Models.ReservationModels
 {
