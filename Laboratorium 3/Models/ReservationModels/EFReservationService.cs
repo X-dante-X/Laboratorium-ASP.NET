@@ -1,6 +1,5 @@
 ﻿using Data;
 using Data.Entities;
-using Data.Entities.Reservarion;
 
 namespace Laboratorium_3.Models.ReservationModels
 {
@@ -14,17 +13,27 @@ namespace Laboratorium_3.Models.ReservationModels
         }
         public int Add(Reservation reservation)
         {
-            var e = _context.Reservations.Add(ReservationMapper.ToEntity(reservation));
+            var reservationEntity = ReservationMapper.ToEntity(reservation);
+
+            var addedReservation = _context.Reservations.Add(reservationEntity);
             _context.SaveChanges();
-            return e.Entity.Id;
+
+            var pokojDetailsEntity = ReservationMapper.ToP(reservation);
+            pokojDetailsEntity.Id = addedReservation.Entity.ReservationEntityId;
+
+            _context.PokojDetails.Add(pokojDetailsEntity);
+            _context.SaveChanges();
+
+            return addedReservation.Entity.ReservationEntityId;
         }
 
         public Reservation? FindById(int id)
         {
-            var entity = _context.Reservations.Find(id);
-            if (entity != null)
+            var entityr = _context.Reservations.Find(id);
+            var entityd = _context.PokojDetails.Find(id);
+            if (entityr != null)
             {
-                return ReservationMapper.FromEntity(entity);
+                return ReservationMapper.FromEntity(entityr, entityd);
             }
             return null;
         }
@@ -47,6 +56,8 @@ namespace Laboratorium_3.Models.ReservationModels
         public void Update(Reservation reservation)
         {
             _context.Reservations.Update(ReservationMapper.ToEntity(reservation));
+            _context.PokojDetails.Update(ReservationMapper.ToP(reservation));
+
             _context.SaveChanges();
 
         }
@@ -54,7 +65,7 @@ namespace Laboratorium_3.Models.ReservationModels
         public PagingList<Reservation> FindPage(int page, int size)
         {
             return PagingList<Reservation>.Create(
-            (p, s) => _context.Reservations.OrderBy(c => c.Wlasciciel)
+            (p, s) => _context.Reservations.OrderBy(c => c.ContactEntityContactId)
                 .Skip((p - 1) * s)
                 .Take(s)
                 .Select(ReservationMapper.FromEntity)
@@ -113,5 +124,17 @@ namespace Laboratorium_3.Models.ReservationModels
             });
         }
 
+        public List<ContactEntity> FindAllContacts()
+        {
+            return _context.Contacts.ToList();
+        }
+
+        public Task<List<ContactEntity>> FindAllContactsAsync()
+        {
+            return Task.Run(() =>
+            {
+                return FindAllContacts();
+            });
+        }
     }
 }

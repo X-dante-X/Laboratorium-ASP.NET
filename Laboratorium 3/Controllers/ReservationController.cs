@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 
 namespace Laboratorium_3.Controllers
 {
@@ -16,10 +18,44 @@ namespace Laboratorium_3.Controllers
             _reservationService = reservationService;
         }
         [AllowAnonymous]
-
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             return View(await _reservationService.FindAllAsync());
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> SearchIndexApi(string? search = null)
+        {
+            try
+            {
+                List<Reservation> reservations;
+
+                using (var httpClient = new HttpClient())
+                {
+                    httpClient.BaseAddress = new Uri("https://localhost:7149/");
+                    var response = await httpClient.GetAsync($"api/reservations?q={search}");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var content = await response.Content.ReadAsStringAsync();
+                        reservations = JsonConvert.DeserializeObject<List<Reservation>>(content);
+                    }
+                    else
+                    {
+                        reservations = new List<Reservation>();
+                    }
+                }
+
+                ViewBag.SearchTerm = !string.IsNullOrEmpty(search) ? search : null;
+
+                return View(reservations);
+            }
+            catch (Exception)
+            {
+                ViewBag.SearchTerm = null;
+                return View(new List<Reservation>());
+            }
         }
 
         [HttpGet]
@@ -33,9 +69,12 @@ namespace Laboratorium_3.Controllers
             return View(await _reservationService.FindPageAsync(page, size));
         }
 
+        [HttpGet]
         public async Task<IActionResult> Create()
         {
-            return View();
+            var contacts = CreateContactItemList();
+            var model = new Reservation { ContactList = contacts };
+            return View(model);
         }
 
         [HttpPost]
@@ -46,13 +85,17 @@ namespace Laboratorium_3.Controllers
                 await _reservationService.AddAsync(model);
                 return RedirectToAction("Index");
             }
-            return View();
+            model.ContactList = CreateContactItemList();
+
+            return View(model);
         }
 
         [HttpGet]
         public async Task<IActionResult> Update(int id)
         {
-            return View(await _reservationService.FindByIdAsync(id));
+            var model = await _reservationService.FindByIdAsync(id);
+            model.ContactList = CreateContactItemList();
+            return View(model);
         }
 
         [HttpPost]
@@ -63,13 +106,16 @@ namespace Laboratorium_3.Controllers
                 await _reservationService.UpdateAsync(model);
                 return RedirectToAction("Index");
             }
-            return View();
+            model.ContactList = CreateContactItemList();
+            return View(model);
         }
 
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            return View(await _reservationService.FindByIdAsync(id));
+            var model = await _reservationService.FindByIdAsync(id);
+            model.ContactList = CreateContactItemList();
+            return View(model);
         }
 
         [HttpPost]
@@ -84,5 +130,15 @@ namespace Laboratorium_3.Controllers
         {
             return View(await _reservationService.FindByIdAsync(id));
         }
+
+        private List<SelectListItem> CreateContactItemList()
+        {
+            var group = new SelectListGroup { Name = "Kontakty" };
+            return _reservationService.FindAllContactsAsync()
+                .Result
+                .Select(e => new SelectListItem { Text = e.Name, Value = e.ContactId.ToString(), Group = group })
+                .ToList();
+        }
+
     }
 }

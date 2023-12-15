@@ -6,6 +6,8 @@
 <h1>Lista rezerwacji</h1>
 <a class="btn btn-primary" asp-controller="Reservation" asp-action="Create">Utworz rezerwacje</a>
 <a class="btn btn-primary" asp-controller="Reservation" asp-action="Index">Zwykla witryna</a>
+<a class="btn btn-primary" asp-controller="Reservation" asp-action="SearchIndex">Wyszukiwarka Właściciela</a>
+
 
 @if (Model.Data.Count() > 0)
 {
@@ -13,7 +15,7 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Data.GetEnumerator().Current.Wlasciciel)
+                    @Html.DisplayNameFor(model => model.Data.GetEnumerator().Current.ContactId)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Data.GetEnumerator().Current.Miasto)
@@ -31,7 +33,7 @@
             {
                 <tr>
                     <td>
-                        @item.Wlasciciel
+                        @item.ContactName
                     </td>
                     <td>
                         @item.Miasto

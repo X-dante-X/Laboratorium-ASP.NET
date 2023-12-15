@@ -1,43 +1,89 @@
 ﻿using Data.Entities;
-using Data.Entities.Reservarion;
-using Data.Migrations;
 using Data.Models;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace Laboratorium_3.Models.ReservationModels
+namespace Laboratorium_3.Models.ReservationModels;
+
+public class ReservationMapper
 {
-    public class ReservationMapper
+    public static Reservation FromEntity(ReservationEntity entityr, PokojDetailsEntity entityp)
     {
-        public static Reservation FromEntity(ReservationEntity entity)
+        if (entityr == null)
         {
-            return new Reservation()
-            {
-                Id = entity.Id,
-                Data = entity.Data,
-                Miasto = entity.Adress.City,
-                Adress = $"{entity.Adress.Street} {entity.Adress.PostalCode}",
-                Pokoj = entity.Pokoj,
-                Wlasciciel = entity.Wlasciciel,
-                Cena = entity.Cena
-            };
+            return null;
         }
 
-        public static ReservationEntity ToEntity(Reservation model)
+        return new Reservation()
         {
-            return new ReservationEntity()
-            {
-                Id = model.Id,
-                Data = model.Data,
-                Adress = new Adress() 
-                { 
-                    City = model.Miasto,
-                    Street = model.Adress.Split(' ').Length >= 1 ? model.Adress.Split(' ')[0] : model.Adress,
-                    PostalCode = model.Adress.Split(' ').Length >= 2 ? model.Adress.Split(' ')[1] : "NULL",
-                },
-                Pokoj = model.Pokoj,
-                Wlasciciel = model.Wlasciciel,
-                Cena = model.Cena
-            };
+            Id = entityr.ReservationEntityId,
+            Data = entityr.Data,
+            Miasto = entityr.Adress?.City,
+            Adress = entityr.Adress != null ? $"{entityr.Adress.Street} {entityr.Adress.PostalCode}" : string.Empty,
+            PokojNazwa = entityp.Nazwa,
+            PokojNumer = entityp.Numer,
+            PokojPietro = entityp.Pietro,
+            PokojRozmiar = entityp.Rozmiar,
+            Cena = entityr.Cena,
+            ContactId = entityr.ContactEntityContactId,
+            ContactName = entityr.ContactName
+        };
+    }
+    public static Reservation FromEntity(ReservationEntity entityr)
+    {
+        if (entityr == null)
+        {
+            return null;
         }
+
+        return new Reservation()
+        {
+            Id = entityr.ReservationEntityId,
+            Data = entityr.Data,
+            Miasto = entityr.Adress?.City,
+            Adress = entityr.Adress != null ? $"{entityr.Adress.Street} {entityr.Adress.PostalCode}" : string.Empty,
+            Cena = entityr.Cena,
+            ContactName = entityr.ContactName
+
+        };
+    }
+
+    public static PokojDetailsEntity ToP(Reservation model)
+    {
+        if (model == null)
+        {
+            return null;
+        }
+
+        return new PokojDetailsEntity()
+        {
+            Id = model.Id,
+            Nazwa = model.PokojNazwa,
+            Numer = model.PokojNumer,
+            Pietro = model.PokojPietro,
+            Rozmiar = model.PokojRozmiar,
+        };
+    }
+
+    public static ReservationEntity ToEntity(Reservation model)
+    {
+        if (model == null)
+        {
+            return null;
+        }
+
+        return new ReservationEntity()
+        {
+            ReservationEntityId = model.Id,
+            Data = model.Data,
+            Adress = new Adress()
+            {
+                City = model.Miasto,
+                Street = model.Adress?.Split(' ').FirstOrDefault() ?? string.Empty,
+                PostalCode = model.Adress?.Split(' ').Skip(1).FirstOrDefault() ?? "NULL",
+            },          
+            Cena = model.Cena,
+            ContactEntityContactId = model.ContactId,
+            ContactName = model.ContactName,
+        };
     }
 }

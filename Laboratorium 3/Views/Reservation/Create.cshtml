@@ -20,14 +20,29 @@
         <span class="text-danger" asp-validation-for="Adress"></span>
     </div>
     <div class="mb-3">
-        <label asp-for="Pokoj"></label>
-        <input class="form-control" asp-for="Pokoj" />
-        <span class="text-danger" asp-validation-for="Pokoj"></span>
+        <label asp-for="PokojNumer"></label>
+        <input class="form-control" asp-for="PokojNumer" />
+        <span class="text-danger" asp-validation-for="PokojNumer"></span>
     </div>
     <div class="mb-3">
-        <label asp-for="Wlasciciel"></label>
-        <input class="form-control" asp-for="Wlasciciel" />
-        <span class="text-danger" asp-validation-for="Wlasciciel"></span>
+        <label asp-for="PokojNazwa"></label>
+        <input class="form-control" asp-for="PokojNazwa" />
+        <span class="text-danger" asp-validation-for="PokojNazwa"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="PokojPietro"></label>
+        <input class="form-control" asp-for="PokojPietro" />
+        <span class="text-danger" asp-validation-for="PokojPietro"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="PokojRozmiar"></label>
+        <input class="form-control" asp-for="PokojRozmiar" />
+        <span class="text-danger" asp-validation-for="PokojRozmiar"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="ContactId"></label>
+        <select class="form-control" asp-for="ContactId" asp-items="@Model.ContactList"></select>
+        <a class="btn btn-primary" asp-controller="Contact" asp-action="Create">Utworz Contact</a>
     </div>
     <div class="mb-3">
         <label asp-for="Cena"></label>
@@ -37,4 +52,22 @@
     <div class="mb-3">
         <button class="btn btn-primary" type="submit">Utwórz</button>
     </div>
+    <div class="mb-3">
+        <input type="hidden" class="form-control" asp-for="ContactName" id="ContactName" />
+    </div>
 </form>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('#ContactId').change(function () {
+                var selectedContactId = $(this).val();
+
+                var selectedContact = @Html.Raw(Json.Serialize(Model.ContactList))
+                            .find(contact => contact.value == selectedContactId);
+
+                $('#ContactName').val(selectedContact.text);
+            });
+        });
+    </script>
+}

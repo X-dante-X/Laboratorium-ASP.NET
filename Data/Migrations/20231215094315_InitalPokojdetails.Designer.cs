@@ -11,14 +11,13 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231210193434_UpdateContact")]
-    partial class UpdateContact
+    [Migration("20231215094315_InitalPokojdetails")]
+    partial class InitalPokojdetails
     {
-        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.13");
+            modelBuilder.HasAnnotation("ProductVersion", "6.0.25");
 
             modelBuilder.Entity("Data.Entities.ContactEntity", b =>
                 {
@@ -27,6 +26,9 @@ namespace Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("Birth")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
@@ -59,6 +61,7 @@ namespace Data.Migrations
                         {
                             ContactId = 1,
                             Birth = new DateTime(2000, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2000, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "adam@wsei.edu.pl",
                             Name = "Adam",
                             OrganizationId = 101,
@@ -68,7 +71,8 @@ namespace Data.Migrations
                         new
                         {
                             ContactId = 2,
-                            Birth = new DateTime(2000, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Birth = new DateTime(2000, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2000, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "adam@wsei.edu.pl",
                             Name = "Adam",
                             OrganizationId = 102,
@@ -78,7 +82,8 @@ namespace Data.Migrations
                         new
                         {
                             ContactId = 3,
-                            Birth = new DateTime(2000, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Birth = new DateTime(2000, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Created = new DateTime(2000, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "adam@wsei.edu.pl",
                             Name = "Adam",
                             OrganizationId = 102,
@@ -120,20 +125,61 @@ namespace Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Data.Entities.Reservarion.ReservationEntity", b =>
+            modelBuilder.Entity("Data.Entities.PokojDetailsEntity", b =>
                 {
                     b.Property<int>("Id")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Nazwa")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Numer")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Pietro")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Rozmiar")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PokojDetails");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Nazwa = "Room1",
+                            Numer = "101",
+                            Pietro = 1,
+                            Rozmiar = 20
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Nazwa = "Room2",
+                            Numer = "102",
+                            Pietro = 2,
+                            Rozmiar = 25
+                        });
+                });
+
+            modelBuilder.Entity("Data.Entities.ReservationEntity", b =>
+                {
+                    b.Property<int>("ReservationEntityId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal>("Cena")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("Data")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("ContactEntityContactId")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("Pokoj")
-                        .IsRequired()
+                    b.Property<DateTime>("Data")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Wlasciciel")
@@ -141,25 +187,27 @@ namespace Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("ReservationEntityId");
+
+                    b.HasIndex("ContactEntityContactId");
 
                     b.ToTable("Reservations");
 
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            ReservationEntityId = 1,
                             Cena = 190.23m,
+                            ContactEntityContactId = 1,
                             Data = new DateTime(2000, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Pokoj = "13A",
                             Wlasciciel = "Adam"
                         },
                         new
                         {
-                            Id = 2,
+                            ReservationEntityId = 2,
                             Cena = 156.99m,
+                            ContactEntityContactId = 2,
                             Data = new DateTime(2012, 11, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Pokoj = "5",
                             Wlasciciel = "Adam"
                         });
                 });
@@ -192,8 +240,8 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c0bb7131-b835-42a2-8b53-8bae7a0fd538",
-                            ConcurrencyStamp = "c0bb7131-b835-42a2-8b53-8bae7a0fd538",
+                            Id = "03c99e3b-1916-449c-a1fc-f7adc579c2c5",
+                            ConcurrencyStamp = "03c99e3b-1916-449c-a1fc-f7adc579c2c5",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });
@@ -288,17 +336,17 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9c484dfb-fedb-45da-a247-5097fdf5dd25",
+                            Id = "86d66475-243e-45a0-9074-7e607e5ee072",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2c1eb32d-effc-46a6-a19e-f4bb4a7de697",
+                            ConcurrencyStamp = "29ad235a-1957-4907-b8ba-0f948bff9203",
                             Email = "adam@wsei.edu.pl",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADAM@WSEI.EDU.PL",
                             NormalizedUserName = "ADAM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAItFiSmMaSUSaxrMP2Zi2oN9d53Y5YbkPA/cHlhQyuK54Vy0A60ikhr7S5wrjiy6g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEN8/kOIPq6JLx3CUBELSome6sV+OmsvZ1sz7e8KfXEsNeYZt3XzDvCNI35HLC+Fenw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "04bb9a16-2ef7-427a-872b-1d7edba3f4a4",
+                            SecurityStamp = "c9ccb9c2-195f-44af-ba99-00b6bfa5a50e",
                             TwoFactorEnabled = false,
                             UserName = "adam"
                         });
@@ -366,8 +414,8 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "9c484dfb-fedb-45da-a247-5097fdf5dd25",
-                            RoleId = "c0bb7131-b835-42a2-8b53-8bae7a0fd538"
+                            UserId = "86d66475-243e-45a0-9074-7e607e5ee072",
+                            RoleId = "03c99e3b-1916-449c-a1fc-f7adc579c2c5"
                         });
                 });
 
@@ -445,8 +493,25 @@ namespace Data.Migrations
                     b.Navigation("Adress");
                 });
 
-            modelBuilder.Entity("Data.Entities.Reservarion.ReservationEntity", b =>
+            modelBuilder.Entity("Data.Entities.PokojDetailsEntity", b =>
                 {
+                    b.HasOne("Data.Entities.ReservationEntity", "ReservationEntity")
+                        .WithOne("PokojDetailsEntity")
+                        .HasForeignKey("Data.Entities.PokojDetailsEntity", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ReservationEntity");
+                });
+
+            modelBuilder.Entity("Data.Entities.ReservationEntity", b =>
+                {
+                    b.HasOne("Data.Entities.ContactEntity", "ContactEntity")
+                        .WithMany("Reservations")
+                        .HasForeignKey("ContactEntityContactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.OwnsOne("Data.Models.Adress", "Adress", b1 =>
                         {
                             b1.Property<int>("ReservationEntityId")
@@ -488,8 +553,9 @@ namespace Data.Migrations
                                 });
                         });
 
-                    b.Navigation("Adress")
-                        .IsRequired();
+                    b.Navigation("Adress");
+
+                    b.Navigation("ContactEntity");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -543,9 +609,20 @@ namespace Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Data.Entities.ContactEntity", b =>
+                {
+                    b.Navigation("Reservations");
+                });
+
             modelBuilder.Entity("Data.Entities.OrganizationEntity", b =>
                 {
                     b.Navigation("Contacts");
+                });
+
+            modelBuilder.Entity("Data.Entities.ReservationEntity", b =>
+                {
+                    b.Navigation("PokojDetailsEntity")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

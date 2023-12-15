@@ -1,5 +1,4 @@
 ﻿using Data.Entities;
-using Data.Entities.Reservarion;
 
 namespace Laboratorium_3.Models.ReservationModels
 {
@@ -11,6 +10,8 @@ namespace Laboratorium_3.Models.ReservationModels
         void DeleteById(int id);
         void Update(Reservation reservation);
         PagingList<Reservation> FindPage(int page, int size);
+        List<ContactEntity> FindAllContacts();
+
 
         Task<int> AddAsync(Reservation reservation);
         Task<Reservation?> FindByIdAsync(int id);
@@ -18,5 +19,7 @@ namespace Laboratorium_3.Models.ReservationModels
         Task DeleteByIdAsync(int id);
         Task UpdateAsync(Reservation reservation);
         Task<PagingList<Reservation>> FindPageAsync(int page, int size);
+        Task<List<ContactEntity>> FindAllContactsAsync();
+
     }
 }

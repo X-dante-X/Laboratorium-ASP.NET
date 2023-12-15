@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Data.Entities;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 namespace Laboratorium_3.Models.ReservationModels
@@ -42,7 +43,7 @@ namespace Laboratorium_3.Models.ReservationModels
         public PagingList<Reservation> FindPage(int page, int size)
         {
             return PagingList<Reservation>.Create(
-            (p, s) => _reservations.OrderBy(c => c.Value.Wlasciciel)
+            (p, s) => _reservations.OrderBy(c => c.Value.ContactId)
                 .Skip((p - 1) * s)
                 .Take(s)
                 .Select(c => c.Value)
@@ -99,6 +100,16 @@ namespace Laboratorium_3.Models.ReservationModels
             {
                 return FindPage(page, size);
             });
+        }
+
+        public List<ContactEntity> FindAllContacts()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<ContactEntity>> FindAllContactsAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }
