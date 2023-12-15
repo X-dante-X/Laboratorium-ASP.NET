@@ -71,8 +71,9 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
         modelBuilder.Entity<ContactEntity>().HasData
         (
             new ContactEntity() { ContactId = 1, Name = "Adam", Email = "adam@wsei.edu.pl", Phone = "124124234", Birth = DateTime.Parse("2000-10-10"), Created = DateTime.Parse("2000-10-10"), Priority = Priority.Low, OrganizationId = 101 },
-            new ContactEntity() { ContactId = 2, Name = "Adam", Email = "adam@wsei.edu.pl", Phone = "124124234", Birth = DateTime.Parse("2000-11-11"), Created = DateTime.Parse("2000-11-11"), Priority = Priority.Normal, OrganizationId = 102 },
-            new ContactEntity() { ContactId = 3, Name = "Adam", Email = "adam@wsei.edu.pl", Phone = "124124234", Birth = DateTime.Parse("2000-12-12"), Created = DateTime.Parse("2000-12-12"), Priority = Priority.Normal, OrganizationId = 102 }
+            new ContactEntity() { ContactId = 2, Name = "John", Email = "john@email.com", Phone = "987654321", Birth = DateTime.Parse("1995-05-15"), Created = DateTime.UtcNow, Priority = Priority.Low, OrganizationId = 101 },
+            new ContactEntity() { ContactId = 3, Name = "Alice", Email = "alice@email.com", Phone = "123456789", Birth = DateTime.Parse("1990-08-20"), Created = DateTime.UtcNow, Priority = Priority.Normal, OrganizationId = 102 },
+            new ContactEntity() { ContactId = 4, Name = "Bob", Email = "bob@email.com", Phone = "555555555", Birth = DateTime.Parse("1985-11-25"), Created = DateTime.UtcNow, Priority = Priority.Urgent, OrganizationId = 102 }
         );
         modelBuilder.Entity<OrganizationEntity>()
             .OwnsOne(o => o.Adress)
@@ -97,8 +98,8 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
                 ReservationEntityId = 2,
                 Data = DateTime.Parse("2012-11-11"),
                 Cena = (decimal)156.99,
-                ContactEntityContactId = 2,
-                ContactName = "Adam"
+                ContactEntityContactId = 3,
+                ContactName = "Alice"
             }
         );
 
