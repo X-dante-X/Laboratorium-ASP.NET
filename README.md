@@ -1,4 +1,4 @@
-#Przegląd projektu:
+# Przegląd projektu:
 
 Projekt obejmuje elementy, jakie zostały przedstawione podczas laboratorium, w tym:
 
@@ -16,7 +16,7 @@ Projekt obejmuje elementy, jakie zostały przedstawione podczas laboratorium, w 
 - *Login:* adam@wsei.edu.pl
 - *Hasło:* 1234Abcd$
 
-#Proces uruchamiania aplikacji (wersja deweloperska):
+# Proces uruchamiania aplikacji (wersja deweloperska):
 
 1. Sklonuj repozytorium z kodem aplikacji:
    ```bash
