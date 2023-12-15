@@ -2,6 +2,7 @@
 using Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data;
@@ -12,18 +13,17 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
     public DbSet<OrganizationEntity> Organizations { get; set; }
     public DbSet<ReservationEntity> Reservations { get; set; }
     public DbSet<PokojDetailsEntity> PokojDetails { get; set; }
-    private string Path { get; set; }
-
-    public AppDbContext()
-    {
-        var folder = Environment.SpecialFolder.LocalApplicationData;
-        var path = Environment.GetFolderPath(folder);
-        Path = System.IO.Path.Join(path, "contacts.db");
-    }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite($"Data source={Path}");
+        string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        string dbFilePath = Path.Combine(currentDirectory, "database.db3");
+        SqliteConnectionStringBuilder builder = new SqliteConnectionStringBuilder();
+        builder.DataSource = dbFilePath;
+        string connectionString = builder.ConnectionString;
+        base.OnConfiguring(optionsBuilder);
+        optionsBuilder.UseSqlite(connectionString);
+        optionsBuilder.EnableSensitiveDataLogging();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
