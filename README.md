@@ -38,41 +38,41 @@ Projekt obejmuje elementy, jakie zostały przedstawione podczas laboratorium, w 
 
 # Opis Własnych Funkcji Aplikacji:
 
-## Utrwalanie Danych w Bazie za pomocą Entity Framework:
+**Utrwalanie Danych w Bazie za pomocą Entity Framework:**
 
 - Wykorzystano Entity Framework Core z bazą danych SQLite w osobnym module.
 - Zaimplementowano inicjację przykładowymi danymi.
 
-## Istnienie Związków:
+**Istnienie Związków:**
 
 - Zdefiniowano trzy związki: organizacje i kontakty, kontakty i rezerwacje, rezerwacje i szczegóły pokoju.
 
-## Serwis do Obsługi Funkcji CRUD:
+**Serwis do Obsługi Funkcji CRUD:**
 
 - Stworzono serwis umożliwiający operacje CRUD na danych.
 
-## Moduł Identity:
+**Moduł Identity:**
 
 - Zaimplementowano moduł Identity do logowania użytkowników.
 - Utworzono dwie role: administrator i zwykły użytkownik.
 
-## Formularze do Realizacji CRUD i Widoki z Dostępem dla Administratora:
+**Formularze do Realizacji CRUD i Widoki z Dostępem dla Administratora:**
 
 - Opracowano formularze do obsługi CRUD oraz widoki z listami obiektów.
 - Zapewniono dostęp do nich tylko dla administratora.
 
-## Moduł Testów Jednostkowych:
+**Moduł Testów Jednostkowych:**
 
 - Zaimplementowano testy jednostkowe dla kontrolerów kontaktów i rezerwacji.
 
-## Kontroler WEBAPI do Udostępniania Wybranych Danych:
+**Kontroler WEBAPI do Udostępniania Wybranych Danych:**
 
 - Stworzono kontroler WEBAPI umożliwiający wyszukiwanie właścicieli rezerwacji.
 
-## Dodano Automatyczną Aktualizację Migracji.
+**Dodano Automatyczną Aktualizację Migracji.**
 
-## Cały Program Działa Asynchronicznie:
+**Cały Program Działa Asynchronicznie:**
 
 - Projekt został zaimplementowany z wykorzystaniem asynchronicznych operacji przy użyciu async, await oraz Task.
   
-## Napisano Dokumentacje Do Projektu
+**Napisano Dokumentacje Do Projektu.**
