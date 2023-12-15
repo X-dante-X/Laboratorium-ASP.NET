@@ -24,7 +24,7 @@ Projekt obejmuje system rezerwacji, umożliwiający zarządzanie danymi dotyczą
    ```
 2. Przejdź do katalogu projektu:
    ```bash
-   cd nazwa-projektu
+   cd Laboratorium-ASP.NET/Laboratorium 3
    ```
 3. Zainstaluj zależności przy użyciu narzędzia do zarządzania pakietami:
       ```bash
