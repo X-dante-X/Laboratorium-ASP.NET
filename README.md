@@ -1,6 +1,6 @@
 # Przegląd projektu:
 
-Projekt obejmuje elementy, jakie zostały przedstawione podczas laboratorium, w tym:
+Projekt obejmuje system rezerwacji, umożliwiający zarządzanie danymi dotyczącymi rezerwacji, takimi jak data, adres, pokój, właściciel oraz cena, w tym:
 
 **Lista wykorzystanych technologii:**
 - ASP.NET Core 6.0
