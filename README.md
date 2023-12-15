@@ -26,7 +26,7 @@ Projekt obejmuje system rezerwacji, umożliwiający zarządzanie danymi dotyczą
    ```bash
    cd nazwa-projektu
    ```
-3. Zainstaluj zależności przy użyciu narzędzia do zarządzania pakietami (np. NuGet):
+3. Zainstaluj zależności przy użyciu narzędzia do zarządzania pakietami:
       ```bash
    dotnet restore
    ```
