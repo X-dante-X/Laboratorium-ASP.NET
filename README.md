@@ -36,7 +36,7 @@ Projekt obejmuje elementy, jakie zostały przedstawione podczas laboratorium, w 
    ``` 
 5. Otwórz przeglądarkę i przejdź do https://localhost:7149 (lub inny port, jeśli został zmieniony).
 
-# Opis Własnych Funkcji Aplikacji:
+# Wykonane zostały następujące elementy aplikacji:
 
 **Utrwalanie Danych w Bazie za pomocą Entity Framework:**
 
@@ -75,4 +75,3 @@ Projekt obejmuje elementy, jakie zostały przedstawione podczas laboratorium, w 
 
 - Projekt został zaimplementowany z wykorzystaniem asynchronicznych operacji przy użyciu async, await oraz Task.
   
-**Napisano Dokumentacje Do Projektu.**
