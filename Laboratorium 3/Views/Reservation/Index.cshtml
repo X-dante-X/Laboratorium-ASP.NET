@@ -15,19 +15,30 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(i => Model[0].ContactId)
+                    <a href="@Url.Action("Index", new { sortOrder = ViewBag.CurrentSort == "ContactId_asc" ? "ContactId_desc" : "ContactId_asc" })">
+                        @Html.DisplayNameFor(i => Model[0].ContactId)
+                        <span class="sort-arrow @(ViewBag.CurrentSort == "ContactId_asc" ? "up" : (ViewBag.CurrentSort == "ContactId_desc" ? "down" : ""))"></span>
+                    </a>
                 </th>
                 <th>
-                    @Html.DisplayNameFor(i => Model[0].Miasto)
+                    <a href="@Url.Action("Index", new { sortOrder = ViewBag.CurrentSort == "Miasto_asc" ? "Miasto_desc" : "Miasto_asc" })">
+                        @Html.DisplayNameFor(i => Model[0].Miasto)
+                        <span class="sort-arrow @(ViewBag.CurrentSort == "Miasto_asc" ? "up" : (ViewBag.CurrentSort == "Miasto_desc" ? "down" : ""))"></span>
+                    </a>
                 </th>
                 <th>
-                    @Html.DisplayNameFor(i => Model[0].Data)
+                    <a href="@Url.Action("Index", new { sortOrder = ViewBag.CurrentSort == "Data_asc" ? "Data_desc" : "Data_asc" })">
+                        @Html.DisplayNameFor(i => Model[0].Data)
+                        <span class="sort-arrow @(ViewBag.CurrentSort == "Data_asc" ? "up" : (ViewBag.CurrentSort == "Data_desc" ? "down" : ""))"></span>
+                    </a>
                 </th>
                 <th>
                     Akcje
                 </th>
             </tr>
         </thead>
+
+
         <tbody>
             @foreach (var item in Model)
             {

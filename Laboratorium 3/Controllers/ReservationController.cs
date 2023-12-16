@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Newtonsoft.Json;
 
 namespace Laboratorium_3.Controllers
@@ -19,9 +20,44 @@ namespace Laboratorium_3.Controllers
         }
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            return View(await _reservationService.FindAllAsync());
+            var reservations = await _reservationService.FindAllAsync();
+
+            reservations = SortReservations(reservations, sortOrder);
+
+            ViewBag.CurrentSort = sortOrder;
+
+            return View(reservations);
+        }
+        private List<Reservation> SortReservations(List<Reservation> reservations, string sortOrder)
+        {
+            switch (sortOrder)
+            {
+                case "ContactId_asc":
+                    reservations = reservations.OrderBy(r => r.ContactName).ToList();
+                    break;
+                case "ContactId_desc":
+                    reservations = reservations.OrderByDescending(r => r.ContactName).ToList();
+                    break;
+                case "Miasto_asc":
+                    reservations = reservations.OrderBy(r => r.Miasto).ToList();
+                    break;
+                case "Miasto_desc":
+                    reservations = reservations.OrderByDescending(r => r.Miasto).ToList();
+                    break;
+                case "Data_asc":
+                    reservations = reservations.OrderBy(r => r.Data).ToList();
+                    break;
+                case "Data_desc":
+                    reservations = reservations.OrderByDescending(r => r.Data).ToList();
+                    break;
+                default:
+                    reservations = reservations.OrderBy(r => r.ContactId).ToList();
+                    break;
+            }
+
+            return reservations;
         }
 
         [HttpGet]
