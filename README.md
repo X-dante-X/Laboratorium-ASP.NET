@@ -63,9 +63,9 @@ Projekt obejmuje system rezerwacji, umożliwiający zarządzanie danymi dotyczą
   
 **Funkcje Charakterystyczne Aplikacji:**
 
-- Wyszukiwanie rezerwacji
-- Sortowanie rezerwacji
-- Stronicowanie strony 
+- Wyszukiwanie rezerwacji.
+- Sortowanie rezerwacji.
+- Stronicowanie strony.
 
 **Moduł Testów Jednostkowych:**
 
@@ -79,7 +79,7 @@ Projekt obejmuje system rezerwacji, umożliwiający zarządzanie danymi dotyczą
 
 **Modyfikacja Wyglądu Aplikacji:**
 
-- Wygląd strony został stworzony przy użyciu Tailwind CSS
+- Wygląd strony został stworzony przy użyciu Tailwind CSS.
 
 **Cały Program Działa Asynchronicznie:**
 
