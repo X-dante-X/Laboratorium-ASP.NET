@@ -61,7 +61,7 @@ Projekt obejmuje system rezerwacji, umożliwiający zarządzanie danymi dotyczą
 - Opracowano formularze do obsługi CRUD oraz widoki z listami obiektów.
 - Zapewniono dostęp do nich tylko dla administratora.
   
-**Funkcje Charakterystyczne Aplikacji**
+**Funkcje Charakterystyczne Aplikacji:**
 
 - Wyszukiwanie rezerwacji
 - Sortowanie rezerwacji
@@ -77,7 +77,7 @@ Projekt obejmuje system rezerwacji, umożliwiający zarządzanie danymi dotyczą
 
 **Dodano Automatyczną Aktualizację Migracji.**
 
-**Modyfikacja Wyglądu Aplikacji**
+**Modyfikacja Wyglądu Aplikacji:**
 
 - Wygląd strony został stworzony przy użyciu Tailwind CSS
 
