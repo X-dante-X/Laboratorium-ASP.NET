@@ -1,7 +1,8 @@
 ﻿@using Laboratorium_3.Models.ReservationModels;
 @model Reservation
 
-<div class="max-w-md mx-auto bg-white p-6 rounded-md shadow-md">
+
+<form class="max-w-md mx-auto bg-white p-6 rounded-md shadow-md" asp-controller="Reservation" asp-action="Create" method="post">
     <h1 class="text-3xl font-bold mb-4 text-center">Dodaj rezerwację</h1>
     <a asp-controller="Reservation" asp-action="Index" class="text-blue-500 text-lg hover:underline flex items-center mb-4">
         <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -9,8 +10,6 @@
         </svg>
         Powrót
     </a>
-
-<form class="max-w-md mx-auto bg-white p-6 rounded-md shadow-md" asp-controller="Reservation" asp-action="Create" method="post">
     <div class="mb-4">
             <label class="text-lg font-semibold" asp-for="Data"></label>
             <input class="form-input border rounded-md p-2" asp-for="Data" />
@@ -72,7 +71,7 @@
         <input type="hidden" class="form-input" asp-for="ContactName" id="ContactName" />
     </div>
 </form>
-</div>
+
 
 @section scripts {
     <script>
