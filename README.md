@@ -63,9 +63,9 @@ Projekt obejmuje system rezerwacji, umożliwiający zarządzanie danymi dotyczą
   
 **Funkcje Charakterystyczne Aplikacji**
 
--Wyszukiwanie rezerwacji
--Sortowanie rezerwacji
--Stronicowanie strony 
+- Wyszukiwanie rezerwacji
+- Sortowanie rezerwacji
+- Stronicowanie strony 
 
 **Moduł Testów Jednostkowych:**
 
