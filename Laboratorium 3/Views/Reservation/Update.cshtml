@@ -1,64 +1,73 @@
 ﻿@using Laboratorium_3.Models.ReservationModels;
 @model Reservation
 
-<h1>Edytuj rezerwację</h1>
+<div class="max-w-md mx-auto bg-white p-6 rounded-md shadow-md">
+    <h1 class="text-3xl font-bold mb-4 text-center">Edytuj rezerwację</h1>
 
-<form asp-controller="Reservation" asp-action="Update" method="post">
-    <input asp-for="Id" type="hidden" />
-    <div class="mb-3">
-        <label asp-for="Data">Data</label>
-        <input class="form-control" asp-for="Data" />
-        <span asp-validation-for="Data"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="Miasto">Miasto</label>
-        <input class="form-control" asp-for="Miasto" />
-        <span class="text-danger" asp-validation-for="Miasto"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="Adress">Adres</label>
-        <input class="form-control" asp-for="Adress" />
-        <span class="text-danger" asp-validation-for="Adress"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="PokojNumer"></label>
-        <input class="form-control" asp-for="PokojNumer" />
-        <span class="text-danger" asp-validation-for="PokojNumer"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="PokojNazwa"></label>
-        <input class="form-control" asp-for="PokojNazwa" />
-        <span class="text-danger" asp-validation-for="PokojNazwa"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="PokojPietro"></label>
-        <input class="form-control" asp-for="PokojPietro" />
-        <span class="text-danger" asp-validation-for="PokojPietro"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="PokojRozmiar"></label>
-        <input class="form-control" asp-for="PokojRozmiar" />
-        <span class="text-danger" asp-validation-for="PokojRozmiar"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="ContactId"></label>
-        <select class="form-control" asp-for="ContactId" asp-items="@Model.ContactList"></select>
-        <a class="btn btn-primary" asp-controller="Contact" asp-action="Create">Utworz Contact</a>
-    </div>
-    <div class="mb-3">
-        <label asp-for="Cena">Cena</label>
-        <input class="form-control" asp-for="Cena" />
-        <span class="text-danger" asp-validation-for="Cena"></span>
-    </div>
-    <div class="mb-3">
-        <button class="btn btn-primary" type="submit">
-            Zapisz
-        </button>
-    </div>
-    <div class="mb-3">
-        <input type="hidden" class="form-control" asp-for="ContactName" id="ContactName" />
-    </div>
-</form>
+    <form class="max-w-md mx-auto bg-white p-6 rounded-md shadow-md" asp-controller="Reservation" asp-action="Create" method="post">
+        <div class="mb-4">
+            <label class="text-lg font-semibold" asp-for="Data"></label>
+            <input class="form-input border rounded-md p-2" asp-for="Data" />
+            <span class="text-red-500 text-xs" asp-validation-for="Data"></span>
+        </div>
+        <div class="mb-4">
+            <label class="text-lg font-semibold" asp-for="Miasto"></label>
+            <input class="form-input border rounded-md p-2" asp-for="Miasto" />
+            <span class="text-red-500 text-xs" asp-validation-for="Miasto"></span>
+        </div>
+
+        <div class="mb-4">
+            <label class="text-lg font-semibold" asp-for="Adress"></label>
+            <input class="form-input border rounded-md p-2" asp-for="Adress" />
+            <span class="text-red-500 text-xs" asp-validation-for="Adress"></span>
+        </div>
+
+        <div class="mb-4">
+            <label class="text-lg font-semibold" asp-for="PokojNumer"></label>
+            <input class="form-input border rounded-md p-2 border rounded-md p-2" asp-for="PokojNumer" />
+            <span class="text-red-500 text-xs" asp-validation-for="PokojNumer"></span>
+        </div>
+
+        <div class="mb-4">
+            <label class="text-lg font-semibold" asp-for="PokojNazwa"></label>
+            <input class="form-input border rounded-md p-2" asp-for="PokojNazwa" />
+            <span class="text-red-500 text-xs" asp-validation-for="PokojNazwa"></span>
+        </div>
+
+        <div class="mb-4">
+            <label class="text-lg font-semibold" asp-for="PokojPietro"></label>
+            <input class="form-input  border rounded-md p-2" asp-for="PokojPietro" />
+            <span class="text-red-500 text-xs" asp-validation-for="PokojPietro"></span>
+        </div>
+
+        <div class="mb-4">
+            <label class="text-lg font-semibold" asp-for="PokojRozmiar"></label>
+            <input class="form-input border rounded-md p-2" asp-for="PokojRozmiar" />
+            <span class="text-red-500 text-xs" asp-validation-for="PokojRozmiar"></span>
+        </div>
+
+        <div class="mb-4">
+            <label class="text-lg font-semibold" asp-for="ContactId"></label>
+            <select class="form-select border rounded-md p-2" asp-for="ContactId" asp-items="@Model.ContactList"></select>
+            <a class="text-blue-500 text-sm hover:underline" asp-controller="Contact" asp-action="Create">Utworz Contact</a>
+        </div>
+
+        <div class="mb-4">
+            <label class="text-lg font-semibold" asp-for="Cena"></label>
+            <input class="form-input  border rounded-md p-2" asp-for="Cena" />
+            <span class="text-red-500 text-xs" asp-validation-for="Cena"></span>
+        </div>
+
+        <div class="mb-4">
+            <button class="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-700" type="submit">Zapisz</button>
+        </div>
+
+        <div class="mb-4">
+            <input type="hidden" class="form-input" asp-for="ContactName" id="ContactName" />
+        </div>
+    </form>
+</div>
+
 
 @section scripts {
     <script>
