@@ -7,7 +7,7 @@ Projekt obejmuje system rezerwacji, umożliwiający zarządzanie danymi dotyczą
 - ASP.NET Core Web API
 - Entity Framework Core z bazą danych SQLite
 - Microsoft Identity do autentykacji i autoryzacji
-- Bootstrap
+- Bootstrap, Tailwind
 - XUnit do testów jednostkowych
 
 **Dane przykładowych użytkowników:**
@@ -60,6 +60,12 @@ Projekt obejmuje system rezerwacji, umożliwiający zarządzanie danymi dotyczą
 
 - Opracowano formularze do obsługi CRUD oraz widoki z listami obiektów.
 - Zapewniono dostęp do nich tylko dla administratora.
+  
+**Funkcje Charakterystyczne Aplikacji:**
+
+- Wyszukiwanie rezerwacji.
+- Sortowanie rezerwacji.
+- Stronicowanie strony.
 
 **Moduł Testów Jednostkowych:**
 
@@ -70,6 +76,10 @@ Projekt obejmuje system rezerwacji, umożliwiający zarządzanie danymi dotyczą
 - Stworzono kontroler WEBAPI umożliwiający wyszukiwanie właścicieli rezerwacji.
 
 **Dodano Automatyczną Aktualizację Migracji.**
+
+**Modyfikacja Wyglądu Aplikacji:**
+
+- Wygląd strony został stworzony przy użyciu Tailwind CSS.
 
 **Cały Program Działa Asynchronicznie:**
 
