@@ -2,7 +2,7 @@
 @using Data.Models;
 @model Contact
 
-<h1>Dodaj kontakt</h1>
+<h1 class="text-2xl font-bold mb-4">Dodaj kontakt</h1>
 
 <form asp-controller="Contact" asp-action="CreateApi" method="post">
     <div class="mb-3">
@@ -40,7 +40,7 @@
         <span asp-validation-for="Priority"></span>
     </div>
     <div class="mb-3">
-        <button class="btn btn-primary" type="submit">Utworz</button>
+        <button class="btn bg-blue-500 btn-primary" type="submit">Utworz</button>
     </div>
 </form>
 
