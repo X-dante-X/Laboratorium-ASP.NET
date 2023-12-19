@@ -16,6 +16,7 @@ Projekt obejmuje system rezerwacji, umożliwiający zarządzanie danymi dotyczą
 - *Login:* adam@wsei.edu.pl
 - *Hasło:* 1234Abcd$
 
+
 # Proces uruchamiania aplikacji (wersja deweloperska):
 
 1. Sklonuj repozytorium z kodem aplikacji:
@@ -35,6 +36,7 @@ Projekt obejmuje system rezerwacji, umożliwiający zarządzanie danymi dotyczą
    dotnet run
    ``` 
 5. Otwórz przeglądarkę i przejdź do https://localhost:7149 (lub inny port, jeśli został zmieniony).
+
 
 # Wykonane zostały następujące elementy aplikacji:
 
